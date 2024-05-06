@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams} from 'react-router-dom'; // Import Link component
 import shoesData from '../data/shoesData';
 import './ProductDetail.css';
+import { useLocation } from 'react-router-dom';
+
+
 
 const ProductDetail = ({ addToCart }) => {
   const { id } = useParams();
@@ -11,6 +14,8 @@ const ProductDetail = ({ addToCart }) => {
   const [size, setSize] = useState('UK7');
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const location = useLocation();
+  const username = new URLSearchParams(location.search).get('username');
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -40,14 +45,39 @@ const ProductDetail = ({ addToCart }) => {
     }
   };
 
-  const handleBuyNow = () => {
+
+  const handleBuyNow = async () => {
     const cgst = totalPrice * 0.5;
     const sgst = totalPrice * 0.5;
     const totalAmount = totalPrice + cgst + sgst;
-
-    alert(`Total Price: ₹${totalPrice}\nCGST (50%): ₹${cgst.toFixed(2)}\nSGST (50%): ₹${sgst.toFixed(2)}\nTotal Amount: ₹${totalAmount.toFixed(2)}`);
+  
+    try {
+      const response = await fetch('http://127.0.0.1:5000/purchase', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          productId: id,
+          size,
+          quantity,
+          totalPrice,
+          username
+        })
+      });
+  
+      if (response.ok) {
+        // Handle successful purchase
+        alert('Purchase successful!');
+      } else {
+        // Handle purchase errors
+        alert('Failed to make purchase. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Error making purchase:', error);
+      alert('Failed to make purchase. Please try again later.');
+    }
   };
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -67,7 +97,7 @@ const ProductDetail = ({ addToCart }) => {
           <h2>{product.name}</h2>
           <p>Price: ₹{product.price}</p>
           <div className="size">
-            <p className='size1'>Select Size:</p>
+            <p className='size1'>Select Size: {size} </p>
             <div className="size-options">
               {['UK7', 'UK8', 'UK9', 'UK10'].map((sizeOption) => (
                 <button

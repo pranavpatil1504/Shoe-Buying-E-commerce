@@ -1,0 +1,201 @@
+/* App.css */
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cart-page {
+  margin-top: 20px;
+}
+
+.search-filter {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-left: 32px;
+  width: 50%;
+}
+
+.search-filter ::placeholder {
+  color: rgba(255, 255, 255, 0.707);
+  font-weight: bold;
+}
+
+.search-filter input {
+  color: #ccc;
+  background-color: rgb(42, 42, 42);
+  width: 25%;
+  margin-top: 38px;
+  border-radius: 20px;
+  border: 2px solid rgb(255, 255, 255);
+  padding: 10px;
+  transition: transform 0.8s ease-in-out;
+}
+
+select {
+  border: 2px solid rgb(255, 255, 255);
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.707);
+  background-color: rgb(42, 42, 42);
+  margin-top: 35px;
+  border-radius: 10px;
+  width: 39%;
+  margin-left: 90px;
+  transition: transform 0.8s ease-in-out;
+}
+
+.search-bar button {
+  padding: 8px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+}
+
+.filter button {
+  padding: 8px 20px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cart-item {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.cart-item img {
+  width: 100%;
+  border-radius: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-item img:hover {
+  transform: scale(1.05);
+}
+
+.cart-item h3 {
+  margin-top: 10px;
+}
+
+.cart-item button {
+  margin-top: 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.cart-item button:hover {
+  background-color: #c82333;
+}
+
+.checkout-button {
+  display: block;
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 8px 0;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+.checkout-button:hover {
+  background-color: #0056b3;
+}
+
+.App {
+  text-align: center;
+}
+
+.header {
+  position: relative;
+  background-color: 333;
+  padding: 20px 0;
+}
+.shoelogo{
+  
+}
+h1.logo {
+  color: white;
+  margin-left: 53.5%;
+  scale: calc(2.3);
+}
+
+.nav {
+  justify-content: center;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.nav a.active {
+  color: rgb(255, 248, 171); /* Change color to indicate active link */
+}
+
+.nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.nav li {
+  background-color: rgb(42, 42, 42);
+  padding: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 12px;
+  margin-top: 12px;
+  margin-right: 20px;
+}
+
+.nav li:last-child {
+  margin-right: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+/* Make responsive */
+@media screen and (max-width: 768px) {
+  .nav {
+    display: block;
+  }
+
+  h1.logo {
+    margin-left: 40%;
+  }
+
+  .nav ul {
+    text-align: center;
+  }
+
+  .nav li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  .nav li:last-child {
+    margin-right: 0;
+  }
+}

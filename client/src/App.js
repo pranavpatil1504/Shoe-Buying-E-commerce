@@ -8,6 +8,8 @@ import Cart from './components/Cart';
 import shoesData from './data/shoesData';
 import ProductDetail from './components/ProductDetail';
 import SignUpPage from './components/SignUpPage';
+import Home from './components/home';
+
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
@@ -53,34 +55,13 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app">
-        <header className="header">
-          <h1 className="logo">Shoe E-Commerce</h1>
-          <div className="search-filter">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={handleSearchInputChange}
-            />
-            <select onChange={handleFilterChange}>
-              <option className= 'option1'value="">Sort by Price</option>
-              <option value="ascending">Price: Low to High</option>
-              <option value="descending">Price: High to Low</option>
-            </select>
-          </div>
-          <nav className="nav">
-            <ul>
-              <li><NavLink to="/" activeClassName="active">Home</NavLink></li>
-              <li><NavLink to="/favorites" activeClassName="active">Favorites</NavLink></li>
-              <li><NavLink to="/cart" activeClassName="active">Cart</NavLink></li>
-              <li><NavLink to="/signup" activeClassName="active">Sign Up</NavLink></li> {/* Added Sign Up link */}
-            </ul>
-          </nav>
-        </header>
         <Routes>
           <Route
-            path="/"
+            path="/home"
+            element={<Home />}
+          />
+          <Route
+            path="/list"
             element={<ProductList products={filteredProducts} addToCart={addToCart} cartItems={cartItems} addToFavorites={addToFavorites} />}
           />
           <Route
@@ -96,11 +77,14 @@ const App = () => {
             element={<ProductDetail addToCart={addToCart} />}
           />
           <Route
-            path="/signup"
+            path="/"
+            element={<SignUpPage />}
+          />
+          <Route
+            path="/signin"
             element={<SignUpPage />}
           />
         </Routes>
-      </div>
     </Router>
   );
 };
