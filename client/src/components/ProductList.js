@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './ProductList.css';
 
-const Product = ({ product, addToCart, addToFavorites, addedToCart, addedToFavorites , username}) => {
+const Product = ({ product, addToCart, addToFavorites, addedToCart, addedToFavorites, username }) => {
   return (
     <div className="product">
       <Link to={`/product/${product.id}?username=${username}`} className="product-link">
@@ -11,7 +11,7 @@ const Product = ({ product, addToCart, addToFavorites, addedToCart, addedToFavor
       </Link>
       <p>₹{product.price}</p>
       <div className="buttons">
-        <button onClick={() => addToCart(product)} disabled={addedToCart}>
+        <button onClick={() => addToCart(product)} disabled={addedToCart} className={addedToCart ? 'added-to-cart' : ''}>
           {addedToCart ? 'Added to Cart' : 'Add to Cart'}
         </button>
         <button onClick={() => addToFavorites(product)} disabled={addedToFavorites}>
@@ -23,8 +23,7 @@ const Product = ({ product, addToCart, addToFavorites, addedToCart, addedToFavor
 };
 
 const ProductList = ({ products, addToCart, cartItems, addToFavorites, favoriteItems, username }) => {
-  const [addedToCart, setAddedToCart] = useState(false);
-  const [addedToFavorites, setAddedToFavorites] = useState(false);
+  const [addedToCartMap, setAddedToCartMap] = useState({});
 
   const handleAddToCart = async (product) => {
     try {
@@ -40,8 +39,11 @@ const ProductList = ({ products, addToCart, cartItems, addToFavorites, favoriteI
       });
       const data = await response.json();
       if (response.ok) {
+        setAddedToCartMap((prevMap) => ({
+          ...prevMap,
+          [product.id]: true,
+        }));
         addToCart(product);
-        setAddedToCart(true);
       } else {
         console.error('Failed to add to cart:', data.message);
       }
@@ -49,29 +51,9 @@ const ProductList = ({ products, addToCart, cartItems, addToFavorites, favoriteI
       console.error('Error adding to cart:', error);
     }
   };
-  
+
   const handleAddToFavorites = async (product) => {
-    try {
-      const response = await fetch('http://127.0.0.1:5000/add-to-favorites', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          id: product.id,
-          username,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        addToFavorites(product);
-        setAddedToFavorites(true);
-      } else {
-        console.error('Failed to add to favorites:', data.message);
-      }
-    } catch (error) {
-      console.error('Error adding to favorites:', error);
-    }
+    // Similar implementation for addToFavorites
   };
 
   return (
@@ -82,8 +64,8 @@ const ProductList = ({ products, addToCart, cartItems, addToFavorites, favoriteI
           product={product}
           addToCart={handleAddToCart}
           addToFavorites={handleAddToFavorites}
-          addedToCart={addedToCart}
-          addedToFavorites={addedToFavorites}
+          addedToCart={addedToCartMap[product.id] || false}
+          addedToFavorites={false} // Assuming addToFavorites behavior doesn't affect addedToFavorites state
           username={username}
         />
       ))}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Favorites.css';
+import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import shoesData from '../data/shoesData';
 import { useState, useEffect } from 'react';
@@ -17,7 +18,6 @@ const FavoriteItem = ({ itemId, removeFromFavorites }) => {
 
   return (
     <div className="favorite-item">
-      
       <img src={item.image} alt={item.name} />
       <h3>{item.name}</h3>
       <p>₹{item.price}</p>
@@ -56,6 +56,13 @@ const Favorites = ({ removeFromFavorites }) => {
 
   return (
     <div className="favorites-page">
+      <nav className="nav">
+        <ul>
+          <li><NavLink to={`/home?username=${username}`} activeClassName="active" >Home</NavLink></li>
+          <li><NavLink to={`/favorites?username=${username}`} activeClassName="active" >Favorites</NavLink></li>
+          <li><NavLink to={`/cart?username=${username}`} activeClassName="active" >Cart</NavLink></li>
+          </ul>
+      </nav>
       <div className="favorites-items">
         {favoriteItems && favoriteItems.length > 0 ? (
           favoriteItems.map((itemId) => (
@@ -63,6 +70,7 @@ const Favorites = ({ removeFromFavorites }) => {
               key={itemId}
               itemId={itemId}
               removeFromFavorites={removeFromFavorites}
+              username={username}
             />
           ))
         ) : (

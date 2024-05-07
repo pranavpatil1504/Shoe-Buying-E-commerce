@@ -47,12 +47,12 @@
 }
 
 .size-options {
-  margin-right: 8px;
-  color: #333;
-  border: none;
   display: inline;
   cursor: pointer;
   gap: 20px;
+  display: flex;
+  width: 40px;
+  border-radius: 10px;
 }
 
 .size-options .selected {

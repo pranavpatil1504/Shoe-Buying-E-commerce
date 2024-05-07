@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './App.css';
 import { NavLink } from 'react-router-dom';
 import Favorites from './Favorites.js';
 import ProductList from './ProductList';
@@ -76,7 +75,6 @@ const Home = () => {
     <div className="app">
       <header className="header">
         <h1 className="logo">Shoe E-Commerce</h1>
-        <h3 >Welcome, {username}!</h3>
         <div className="search-filter">
           <input
             type="text"
@@ -90,6 +88,7 @@ const Home = () => {
             <option value="descending">Price: High to Low</option>
           </select>
         </div>
+        <h3 className='welcome'>Welcome, {username}!</h3>
         <nav className="nav">
           <ul>
             <li><NavLink to={`/home?username=${username}`} activeClassName="active" onClick={() => setCurrentPage('list')}>Home</NavLink></li>

@@ -6,11 +6,17 @@
 .cart-page {
   margin-top: 20px;
 }
-
+.welcome{
+  margin-left: 3%;
+  margin-top: 4%;
+  position: relative;
+  color: white;
+  font-size: 140%;
+}
 .search-filter {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-left: 32px;
   width: 50%;
 }

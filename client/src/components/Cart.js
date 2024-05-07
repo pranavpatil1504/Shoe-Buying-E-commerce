@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Cart.css';
 import { useLocation } from 'react-router-dom';
 import shoesData from '../data/shoesData';
@@ -20,6 +21,8 @@ const CartItem = ({ itemId, removeFromCart }) => {
       <p>₹{item.price}</p>
       <div className="buttons">
         <button onClick={handleRemoveFromCart}>Remove from Cart</button>
+        <br></br>
+        <br></br>
         <Link to={`/product/${item.id}?username=${username}`} className="buy-now-button">Buy Now</Link>
       </div>
     </div>
@@ -55,6 +58,13 @@ const Cart = ({ removeFromCart }) => {
 
   return (
     <div className="cart-page">
+      <nav className="nav">
+        <ul>
+          <li><NavLink to={`/home?username=${username}`} activeClassName="active" >Home</NavLink></li>
+          <li><NavLink to={`/favorites?username=${username}`} activeClassName="active" >Favorites</NavLink></li>
+          <li><NavLink to={`/cart?username=${username}`} activeClassName="active" >Cart</NavLink></li>
+          </ul>
+        </nav>
       <div className="cart-items">
         {cartItems && cartItems.length > 0 ? (
           cartItems.map((itemId) => (
